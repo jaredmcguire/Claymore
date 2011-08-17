@@ -17,7 +17,10 @@ namespace Claymore
 			}
 			catch (Exception ex)
 			{
-				Console.Error.Write("Exception: {0}", ex.Message);
+				Console.Error.WriteLine();
+				Console.Error.WriteLine("Exception: {0}", ex.Message);
+				Console.Error.WriteLine(ex.StackTrace);
+				Console.Error.WriteLine();
 			}
 		}
 	}

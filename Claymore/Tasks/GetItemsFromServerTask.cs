@@ -1,13 +1,14 @@
 ﻿using System.Linq;
 using ArcLight.Core;
 using Claymore.Models;
+using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 
 namespace Claymore.Tasks
 {
 	public interface IGetItemsFromServerTask
 	{
-		ServerItems Run(string serverName, string databaseName);
+		ServerItems Run(string connectionString);
 	}
 
 	public class GetItemsFromServerTask : IGetItemsFromServerTask
@@ -19,18 +20,22 @@ namespace Claymore.Tasks
 			this.tracer = tracer;
 		}
 
-		public ServerItems Run(string serverName, string databaseName)
+		public ServerItems Run(string connectionString)
 		{
-			tracer.Write("Connecting to {0} on {1}", databaseName, serverName);
-			var server = new Server(serverName);
+			var connection = new ServerConnection { ConnectionString = connectionString };
+			var server = new Server(connection);
 			server.SetDefaultInitFields(typeof(Table), "IsSystemObject");
 			server.SetDefaultInitFields(typeof(View), "IsSystemObject");
 			server.SetDefaultInitFields(typeof(StoredProcedure), "IsSystemObject");
 			server.SetDefaultInitFields(typeof(UserDefinedFunction), "IsSystemObject");
 			server.SetDefaultInitFields(typeof(Trigger), "IsSystemObject");
-			var database = server.Databases[databaseName];
+
+			tracer.Write("Connecting...");
+			if (server.Version.Major < 9)
+				throw new UnsupportedVersionException("SQL Server 2005 or greater is required.");
 			tracer.Write("Connected");
 
+			var database = server.Databases[connection.SqlConnectionObject.Database];
 			return new ServerItems
 			{
 				Tables = database.Tables.Cast<Table>()

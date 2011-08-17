@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using ArcLight.Core;
+using Claymore.Models;
 using Claymore.Tasks;
 using Microsoft.SqlServer.Management.Smo;
 
@@ -30,10 +31,10 @@ namespace Claymore
 		public void Run(string[] args)
 		{
 			var options = getCommandLineOptions.Run(args);
+
+			var serverItems = getItemsFromServer.Run(options.ConnectionString);
+
 			tracer.Write("Outputing scripts to: {0}", options.OutputPath);
-
-			var serverItems = getItemsFromServer.Run(options.Server, options.Database);
-
 			ProcessItems("tables", serverItems.Tables, options.OutputPath);
 			ProcessItems("views", serverItems.Views, options.OutputPath);
 			ProcessItems("stored procedures", serverItems.StoredProcedures, options.OutputPath);

@@ -6,11 +6,8 @@ namespace Claymore
 {
 	public class Options
 	{
-		[Option("s", "server", Required = true, HelpText = "The name of the server.")]
-		public string Server;
-
-		[Option("d", "database", Required = true, HelpText = "The name of the database.")]
-		public string Database;
+		[Option("c", "connectionstring", Required = false, HelpText = "The connection string to connect with.")]
+		public string ConnectionString;
 
 		[Option("o", "outputpath", Required = true, HelpText = "The output path for sql scripts.")]
 		public string OutputPath;
