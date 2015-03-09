@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Claymore.Starup;
 using CommandLine;
 
 namespace Claymore.Tasks
@@ -21,7 +22,11 @@ namespace Claymore.Tasks
 		private static Options GetOptionsFromCommandLineArgs(string[] args)
 		{
 			var options = new Options();
-			var parser = new CommandLineParser(new CommandLineParserSettings(false, Console.Error));
+		    var parser = new Parser(settings =>
+		                            {
+		                                settings.CaseSensitive = false;
+		                                settings.HelpWriter = Console.Out;
+		                            });
 			if (parser.ParseArguments(args, options) == false)
 				Environment.Exit(1);
 			return options;
