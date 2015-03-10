@@ -14,20 +14,15 @@ namespace Claymore.Tasks
 	{
 		public Options Run(string[] args)
 		{
-			var options = GetOptionsFromCommandLineArgs(args);
-			options.OutputPath = Path.GetFullPath(options.OutputPath);
+            var options = GetOptionsFromCommandLineArgs(args);
+            options.OutputPath = Path.GetFullPath(options.OutputPath);
 			return options;
 		}
 
 		private static Options GetOptionsFromCommandLineArgs(string[] args)
 		{
 			var options = new Options();
-		    var parser = new Parser(settings =>
-		                            {
-		                                settings.CaseSensitive = false;
-		                                settings.HelpWriter = Console.Out;
-		                            });
-			if (parser.ParseArguments(args, options) == false)
+            if (!Parser.Default.ParseArguments(args, options))
 				Environment.Exit(1);
 			return options;
 		}

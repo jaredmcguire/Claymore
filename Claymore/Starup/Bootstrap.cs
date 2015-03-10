@@ -10,6 +10,10 @@ namespace Claymore.Starup
             AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
             var program = new Program();
             program.Start(args);
+#if DEBUG
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+#endif
         }
 
         private static Assembly OnAssemblyResolve(object sender, ResolveEventArgs args)

@@ -6,20 +6,24 @@ namespace Claymore.Starup
 {
     public class Options
     {
-        [Option('c', "connectionstring", Required = false, HelpText = "The connection string to connect with.")]
+        [Option('c', "conn", Required = true, HelpText = "The connection string to connect with.")]
         public string ConnectionString { get; set; }
 
-        [Option('o', "outputpath", Required = true, HelpText = "The output path for sql scripts.")]
+        [Option('o', "out", Required = false, HelpText = "The output path for sql scripts.", DefaultValue = ".\\sql")]
         public string OutputPath { get; set; }
 
-        [HelpOption('h', "help", HelpText = "Dispaly this help screen.")]
+        [HelpOption('?', "help")]
         public string Help()
         {
-            var help = new HelpText(
-                new HeadingInfo("Claymore", Assembly.GetExecutingAssembly().GetName().Version.ToString(2)),
-                new CopyrightInfo("Jared McGuire", 2011),
-                this);
-            return help.ToString();
+            var help = new HelpText
+                       {
+                           Heading = new HeadingInfo("Claymore", Assembly.GetExecutingAssembly().GetName().Version.ToString(2)),
+                           Copyright = new CopyrightInfo("Jared McGuire", 2015),
+                           AdditionalNewLineAfterOption = true,
+                           AddDashesToOption = true
+                       };
+            help.AddOptions(this);
+            return help;
         }
     }
 }
