@@ -1,18 +1,51 @@
-[Bb]in/
-[Oo]bj/
-TestResults/
-_Secure/
-LocalWorkingFolder/
-_ReSharper.*/
-
+# User-specific files
 *.suo
 *.user
-*.swp
-*.vspscc
-*.vssscc
-*.bak
-*.[Cc]ache
+*.sln.docstates
 
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+x64/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+packages/
+tmp/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUNIT
+*.VisualState.xml
+TestResult.xml
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Publish Web Output
+*.[Pp]ublish.xml
+*.azurePubxml
+
+# Others
+node_modules/
+*.Cache
+~$*
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.pfx
+*.bak
+*.publishsettings
 Thumbs.db
 .DS_Store
-~$*

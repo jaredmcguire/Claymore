@@ -6,7 +6,7 @@ namespace Claymore
 {
     public class Program
     {
-        public void Start(string[] args)
+        public static void Main(string[] args)
         {
             var container = new WindsorContainer().Install(FromAssembly.InThisApplication());
             try
@@ -20,6 +20,10 @@ namespace Claymore
                 Console.Error.WriteLine(ex.StackTrace);
                 Console.Error.WriteLine();
             }
+#if DEBUG
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+#endif
         }
     }
 }

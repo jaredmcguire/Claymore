@@ -31,7 +31,7 @@ namespace Claymore
 
             var serverItems = getItemsFromServer.Run(options.ConnectionString);
 
-            Console.WriteLine("Outputing scripts to: {0}", options.OutputPath);
+            Console.WriteLine($"Outputing scripts to: {options.OutputPath}");
 
             ProcessItems("tables", serverItems.Tables, options.OutputPath);
             ProcessItems("views", serverItems.Views, options.OutputPath);
@@ -47,7 +47,7 @@ namespace Claymore
             var objects = items.ToList();
             if (!objects.Any())
                 return;
-            Console.WriteLine("Checking {0} {1}", objects.Count, itemType);
+            Console.WriteLine($"Checking {objects.Count} {itemType}");
             foreach (var item in objects)
             {
                 var file = GetFileInfo(outputPath, itemType, ((ScriptNameObjectBase)item).Name);
@@ -59,7 +59,7 @@ namespace Claymore
         {
             var invalidChars = Path.GetInvalidFileNameChars();
             name = invalidChars.Aggregate(name, (current, invalidChar) => current.Replace(invalidChar, '_'));
-            return new FileInfo(string.Format(@"{0}\{1}\{2}.sql", path, type, name));
+            return new FileInfo($@"{path}\{type}\{name}.sql");
         }
     }
 }
