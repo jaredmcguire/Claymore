@@ -1,0 +1,11 @@
+﻿{
+    "ConnectionString": "server=(local); database=LocalTest; trusted_connection=true;",
+    "OutputPath": ".\\db",
+    "ScriptTables": true,
+    "ScriptViews": true,
+    "ScriptSprocs": true,
+    "ScriptFunctions": true,
+    "ScriptTriggers": true,
+    "ScriptSchemas": true,
+    "ScriptUsers": true
+}
