@@ -1,6 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using Autofac;
+using Claymore.Models;
+using Newtonsoft.Json;
 
 namespace Claymore
 {
@@ -17,14 +21,16 @@ namespace Claymore
 
         private static IContainer CreateContainer()
         {
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             var builder = new ContainerBuilder();
 
-            // all classes with IName convention
-            builder.RegisterAssemblyTypes(assemblies)
+            // IName convention
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                    .InNamespaceOf<Program>()
                    .Where(t => t.IsClass && t.GetInterfaces().Any(i => i.Name == $"I{t.Name}"))
                    .As(t => t.GetInterfaces().First(i => i.Name == $"I{t.Name}"));
+
+            // settings
+            builder.RegisterInstance(JsonConvert.DeserializeObject<Settings>(File.ReadAllText("Claymore.json"))).As<ISettings>();
 
             return builder.Build();
         }

@@ -1,5 +1,5 @@
 ﻿{
-    "ConnectionString": "server=(local); database=LocalTest; trusted_connection=true;",
+    "ConnectionString": "server=SERVERNAME; database=DATABASENAME; trusted_connection=true;",
     "OutputPath": ".\\db",
     "ScriptTables": true,
     "ScriptViews": true,
