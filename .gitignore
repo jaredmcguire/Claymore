@@ -4,15 +4,13 @@
 *.sln.docstates
 
 # Build results
+[Bb]uild/
 [Dd]ebug/
-[Dd]ebugPublic/
 [Rr]elease/
-x64/
-build/
-bld/
 [Bb]in/
 [Oo]bj/
 packages/
+temp/
 tmp/
 
 # MSTest test Results
@@ -38,6 +36,7 @@ _ReSharper*/
 *.azurePubxml
 
 # Others
+.vs/
 node_modules/
 *.Cache
 ~$*
@@ -47,5 +46,6 @@ node_modules/
 *.pfx
 *.bak
 *.publishsettings
+Desktop.ini
 Thumbs.db
 .DS_Store
